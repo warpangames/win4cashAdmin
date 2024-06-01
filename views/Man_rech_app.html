@@ -1,0 +1,260 @@
+<%-  include("include/header.ejs") -%>
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Data Tables</h1>
+      
+    </div><!-- End Page Title -->
+    <div class="d-flex" style="justify-content: flex-end;">
+      <!-- <button class="btn btn-sm btn-success m-1" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add +</button> -->
+    </div>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+            
+              <!-- Table with stripped rows -->
+              <table class="table datatable" id="withdrawTable1">
+                <thead>
+                    <tr>
+                        <th scope="col">S no.</th>
+                        <th scope="col">Tran.id</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">confirmation Screen</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                </thead>
+                <tbody>
+                
+              </tbody>
+              
+              
+            </table>
+            
+              <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+</script>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+<!-- deltet modal -->
+<div class="text-center">
+  <!-- Button HTML (to Trigger Modal) -->
+  <!-- <a >Click to Open Confirm Modal</a> -->
+</div>
+
+<!-- Modal HTML -->
+<div class="de">
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+    <i class="bi bi-exclamation-circle text-danger" style="font-size:2rem"></i>
+      <!-- <div class="modal-header">
+        <div class="icon-box">
+          <i class="bi bi-twitter-x">X</i>
+          <i class="material-icons"></i>
+        </div>
+        <h4 class="modal-title">Are you sure?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div> -->
+      <div class="modal-body">
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- deltet modal -->
+
+
+
+<!-- START Modal ADD LOBBIES -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Lobbies</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Action</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Bot">
+          </div>
+          <button class="btn btn-success">Save</button>
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!--end Modal ADD LOBBIES -->
+
+<!-- START Modal edit LOBBIES -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Lobbies</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+        <div class="form-group col-md-12 mb-3">
+           <label for="inputState">Action</label>
+           <select id="inputState" class="form-control">
+             <option selected>Choose...</option>
+             <option>approval</option>
+             <option>Reject</option>
+           </select>
+         </div>
+          <!-- <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Action</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Min Entry">
+          </div> -->
+          <button class="btn btn-success">Save</button>
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!--end Modal edit LOBBIES -->
+<script>
+</script>
+
+<style>
+  body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+  }
+  .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+      text-align: center;
+  }
+  .form-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+  }
+  .form-group > div {
+      flex: 0 0 48%;
+      margin-bottom: 15px;
+  }
+  label {
+      display: block;
+      margin-bottom: 5px;
+  }
+  input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+  }
+  .form-actions {
+      text-align: center;
+      margin-top: 20px;
+  }
+  .form-actions button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+  }
+  .form-actions button:hover {
+      background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Set Return Multipliers</h1>
+  <form id="bet-form">
+      <div class="form-group" id="form-group-container"></div>
+      <div class="form-actions">
+          <button type="submit">Set Returns</button>
+      </div>
+  </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const numbers = Array.from({ length: 10 }, (_, i) => i + 1);
+  const colors = ['color'];
+  const sizes = ['big', 'small'];
+
+  const formGroupContainer = document.getElementById('form-group-container');
+
+  const createFormGroup = (labelText, inputName) => {
+      const div = document.createElement('div');
+      const label = document.createElement('label');
+      label.textContent = labelText;
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.name = inputName;
+      input.min = 0;
+      input.step = '0.1'; // Allow float values
+      input.required = true;
+      div.appendChild(label);
+      div.appendChild(input);
+      formGroupContainer.appendChild(div);
+  };
+
+  numbers.forEach(number => {
+      createFormGroup(`Number ${number}`, `on${number}`);
+  });
+
+  colors.forEach(color => {
+      createFormGroup(`Color ${color}`, `${color}`);
+  });
+
+  sizes.forEach(size => {
+      createFormGroup(`Size ${size}`, `${size}`);
+  });
+
+  document.getElementById('bet-form').addEventListener('submit',async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const returnData = {};
+      formData.forEach((value, key) => {
+          returnData[key] = value;
+      });
+      // console.log(returnData);
+      // alert('Return rates have been set.');
+      // Here you can add the logic to send this data to your server
+      const res = await axios.post('https://admin.win4cash.in/admin/profitmulti',returnData);
+      console.log(res,'res');
+  });
+</script>
+  </main><!-- End #main -->
+  <!-- <script src="assets/js/main.js"></script> -->
+  
+<%- include("include/footer.ejs") -%>

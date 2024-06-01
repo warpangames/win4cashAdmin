@@ -1,0 +1,148 @@
+<%-  include("include/header.ejs") -%>
+<main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Player</h1>
+      
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="container-fluid shadow pt-2 pb-2" style="background:#fff">
+          <div class="tab-pane fade show active profile-overview" id="profile-overview">
+              <h5 class="card-title">Profile Details</h5>
+  
+              <div class="row">
+                  <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                 
+              </div>
+              <div class="row">
+                  <div class="col-lg-3 col-md-4 label">userphone</div>
+                 
+              </div>
+  
+              
+              <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Wallet</div>
+                  
+              </div>
+              <div class="row">
+                  <div class="col-lg-3 col-md-4 label">bonas</div>
+                  
+              </div>
+              <div class="row">
+                  <div class="col-lg-3 col-md-4 label">WinWallet</div>
+                  
+              </div>
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">TotalLoss</div>
+              
+            </div>
+          </div>
+      </div>
+  </section>
+  
+    <section class="section mt-2">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+                <hr>
+            <center><h3>transaction History</h3></center>
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">amount</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+              
+                </tbody>
+                
+                </table>
+            </div>
+          </div>
+
+        </div>
+        
+      </div>
+    </section>
+<hr>
+
+<section class="section mt-2">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="card">
+        <div class="card-body">
+            <hr>
+        <center><h3>Withdraw History</h3></center>
+          <!-- Table with stripped rows -->
+          <table class="table datatable">
+            <thead>
+              <tr>
+                  <th scope="col">#id</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">PhoneNumber</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">BankName</th>
+                  <th scope="col">IFSC</th>
+                  <th scope="col">UserName</th>
+                  <th scope="col">AccountNumber</th>
+                  <th scope="col">UpiAddress</th>
+              </tr>
+          </thead>
+          <tbody>
+           
+          </tbody>
+            </table>
+        </div>
+      </div>
+
+    </div>
+    
+  </div>
+</section>
+<hr>
+
+<section class="section mt-2">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="card">
+        <div class="card-body">
+            <hr>
+        <center><h3>  Game History</h3></center>
+          <!-- Table with stripped rows -->
+          <table class="table datatable">
+            <thead>
+              <tr>
+                <th scope="col">GameID</th>
+                <th scope="col">gameName</th>
+                <th scope="col">winerPrice</th>
+                <th scope="col">player</th>
+                <th scope="col">gamePrice</th>
+                <th scope="col">date</th>
+                <th scope="col">status</th>
+                <!-- <th scope="col">Action</th> -->
+              </tr>
+            </thead>
+            <tbody>
+             
+          </tbody>
+          
+            </table>
+        </div>
+      </div>
+
+    </div>
+    
+  </div>
+</section>
+</main>
+
+<%- include("include/footer.ejs") -%>

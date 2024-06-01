@@ -1,0 +1,239 @@
+<%-  include("include/header.ejs") -%>
+
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Setting</h1>
+      
+    </div><!-- End Page Title -->
+    <div class="d-flex" style="justify-content: flex-end;">
+      <button class="btn btn-sm btn-success m-1" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add +</button>
+    </div>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+            
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">refer bonus</th>
+                    <th scope="col">referUser bonus</th>
+                    <th scope="col">newuser</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                
+              </tbody>
+              
+                
+</table>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+<!-- deltet modal -->
+<div class="text-center">
+  <!-- Button HTML (to Trigger Modal) -->
+  <!-- <a >Click to Open Confirm Modal</a> -->
+</div>
+
+<!-- Modal HTML -->
+<div class="de">
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+    <i class="bi bi-exclamation-circle text-danger" style="font-size:2rem"></i>
+      <!-- <div class="modal-header">
+        <div class="icon-box">
+          <i class="bi bi-twitter-x">X</i>
+          <i class="material-icons"></i>
+        </div>
+        <h4 class="modal-title">Are you sure?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div> -->
+      <div class="modal-body">
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger delete-modal-btn">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- deltet modal -->
+
+
+
+<!-- START Modal ADD LOBBIES -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Bonus</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <div class="mb-3">
+            <input type="number" class="form-control" id="newuser" name="newuser" placeholder="New Singin Bonus">
+          </div>
+          <div class="mb-3">
+            <input type="number" class="form-control" id="userrefer" name="userrefer" placeholder="User Refer Bonus">
+          </div>
+          <div class="mb-3">
+            <input type="number" class="form-control" id="refer" name="refer" placeholder="Refral Bonus">
+          </div>
+          <button class="btn btn-success" type="button" onclick="submitForm(event)"   style="background-color: green; color: aliceblue;">Save</button>
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!--end Modal ADD LOBBIES -->
+
+<!-- START Modal edit LOBBIES -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Bonus</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <div class="mb-3">
+            <input type="number" class="form-control" id="formGroupExampleInput" value="1000">
+          </div>
+          <div class="mb-3">
+            <input type="number" class="form-control" id="formGroupExampleInput" value="50">
+          </div>
+          <!-- <div class="mb-3">
+            <input type="email" class="form-control" id="formGroupExampleInput" value="pavasini9852@gmail.com">
+          </div>
+          <div class="mb-3">
+            <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Password">
+          </div> -->
+          <button class="btn btn-success">Save</button>
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!--end Modal edit LOBBIES -->
+
+<script>
+   const submitForm = async(event)=> {
+    event.preventDefault();
+    const festivalbonusname = document.getElementById('newuser');
+    const festivalBonus = document.getElementById('userrefer');
+    const datebonus = document.getElementById('refer');
+    const refer = datebonus.value;
+    const newuser = festivalbonusname.value;
+    const referUser = festivalBonus.value;
+    
+    const formData = {
+      refer, referUser, newuser
+    };
+    fetch('http://localhost:5000/referwinadmin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        location.reload()
+        datebonus.value="";
+festivalbonusname.value="";
+ festivalBonus.value="";
+        // Enable the close button
+        const closeButton = document.querySelector('.btn-secondary');
+        closeButton.removeAttribute('disabled');
+        // Close the modal after successful submission
+        $('#exampleModal1').modal('hide');
+      })
+      .catch(error => console.error('Error:', error));
+}
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Function to handle deletion of slider image
+    function deleteDailyBonus(Id) {
+        const formData = {
+          Id
+        };
+        // Send a POST request to delete the slider image
+        fetch(`http://localhost:5000/DeletereferBounsAmount`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete DeleteDailyBounsAmount');
+            }
+            else{
+              location.reload()
+            }
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error deleting DeleteDailyBounsAmount:', error);
+        });
+    }
+
+    // Event listener for delete button clicks
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('delete-btn')) {
+            const button = event.target;
+            const Id = button.getAttribute('data-index');
+            $('#myModal').modal('show');
+            // Event listener for delete confirmations
+            document.querySelector('.delete-modal-btn').addEventListener('click', function() {
+                deleteDailyBonus(Id);
+                // Close the modal
+                $('#myModal').modal('hide');
+            });
+        }
+    });
+});
+
+
+
+
+
+
+
+</script>
+  </main><!-- End #main -->
+  <!-- <script src="assets/js/main.js"></script> -->
+  
+  <%- include("include/footer.ejs") -%>
