@@ -192,7 +192,7 @@ const router = express.Router();
 // Render the view with both sets of data
 
 
-router.get("/home", async (req, res) => {
+router.get("/home", authenticateToken,async (req, res) => {
   try {
     
     res.render("index", {
@@ -210,7 +210,7 @@ router.get("/home", async (req, res) => {
 
 
 
-router.get("/player", async (req, res) => {
+router.get("/player",authenticateToken, async (req, res) => {
   try {
        res.render("player", {
       title: "Entryfees",
@@ -223,7 +223,7 @@ router.get("/player", async (req, res) => {
   }
 });
 
-router.get("/user", async (req, res) => {
+router.get("/user",authenticateToken, async (req, res) => {
   const userId = req.query.id;
   try {
    
@@ -242,14 +242,14 @@ router.get("/user", async (req, res) => {
   }
 });
 
-router.get("/users-profile", (req, res) => {
+router.get("/users-profile",authenticateToken, (req, res) => {
   res.render("users-profile", {
     title: "Users Profile",
     currentRoute: req.url
   });
 });
 
-router.get("/Man_rech_pe", async (req, res) => {
+router.get("/Man_rech_pe",authenticateToken, async (req, res) => {
   try {
     res.render("Man_rech_pe", {
       title: "Man_rech_pe",
@@ -262,7 +262,7 @@ router.get("/Man_rech_pe", async (req, res) => {
   }
 });
 
-router.get("/Man_rech_app", async (req, res) => {
+router.get("/Man_rech_app",authenticateToken, async (req, res) => {
   try {
     res.render("Man_rech_app", {
       title: "Man_rech_app",
@@ -274,7 +274,7 @@ router.get("/Man_rech_app", async (req, res) => {
     res.render("error", { error: "Failed to fetch game prices" });
   }
 });
-router.get("/man_rech_rej", async (req, res) => {
+router.get("/man_rech_rej",authenticateToken, async (req, res) => {
   try {
     res.render("Man_rech_rej", {
       title: "Man_rech_rej",
@@ -286,18 +286,18 @@ router.get("/man_rech_rej", async (req, res) => {
   }
 });
 
-router.get("/pages-register", (req, res) => {
+router.get("/pages-register",authenticateToken, (req, res) => {
   res.render("pages-register", {
     title: "pages-register",
     currentRoute: req.url
   });
 });
 
-router.get("/pages-contact", (req, res) => {
+router.get("/pages-contact",authenticateToken, (req, res) => {
   res.render("pages-contact", { title: "Bonus", currentRoute: req.url });
 });
 
-router.get("/Bonus", async (req, res) => {
+router.get("/Bonus", authenticateToken,async (req, res) => {
   try {
   
     res.render("bonus", {
@@ -312,7 +312,7 @@ router.get("/Bonus", async (req, res) => {
   // res.render("Bonus", { title: "Bonus", currentRoute: req.url });
 });
 
-router.get("/Refer", async (req, res) => {
+router.get("/Refer",authenticateToken, async (req, res) => {
   try {
 
     res.render("refer", {
@@ -327,13 +327,13 @@ router.get("/Refer", async (req, res) => {
   }
 });
 
-router.post("/DeletereReferEarn", DeletereReferEarn);
+router.post("/DeletereReferEarn",authenticateToken, DeletereReferEarn);
 
-router.get("/Win_lose", (req, res) => {
+router.get("/Win_lose",authenticateToken, (req, res) => {
   res.render("Win_lose", { title: "Win", currentRoute: req.url });
 });
 
-router.get("/slider", async (req, res) => {
+router.get("/slider",authenticateToken, async (req, res) => {
   try {
     res.render("slider", {
       title: "Slider",
@@ -346,14 +346,14 @@ router.get("/slider", async (req, res) => {
   }
 });
 
-router.get("/tic_re", (req, res) => {
+router.get("/tic_re",authenticateToken, (req, res) => {
   res.render("tic_re", { title: "Ticket Request", currentRoute: req.url });
 });
 
-router.get("/tic_app", (req, res) => {
+router.get("/tic_app",authenticateToken, (req, res) => {
   res.render("tic_app", { title: "Ticket Approval", currentRoute: req.url });
 });
-router.get("/ReferWin", async (req, res) => {
+router.get("/ReferWin",authenticateToken, async (req, res) => {
   try {
     res.render("ReferWin", {
       title: "Refer Win",
@@ -367,12 +367,12 @@ router.get("/ReferWin", async (req, res) => {
     // res.render("error", { error: "Failed to fetch game prices" });
   }
 });
-router.post("/DeletereReferWin", DeletereReferWin);
+router.post("/DeletereReferWin",authenticateToken, DeletereReferWin);
 // router.get("/Carrom", (req, res) => {
 //   res.render("Carrom", { title: "Ticket Approval", currentRoute: req.url });
 // });
 
-router.get("/rech_rej", async (req, res) => {
+router.get("/rech_rej",authenticateToken, async (req, res) => {
   try {
     res.render("rech_rej", {
       title: "Recharge Reject",
@@ -386,7 +386,7 @@ router.get("/rech_rej", async (req, res) => {
   }
 });
 
-router.get("/rech_pe", async (req, res) => {
+router.get("/rech_pe",authenticateToken, async (req, res) => {
   try {
     res.render("rech_pe", {
       title: "Recharge Request",
@@ -400,7 +400,7 @@ router.get("/rech_pe", async (req, res) => {
   }
 });
 
-router.get("/rech_app", async (req, res) => {
+router.get("/rech_app",authenticateToken, async (req, res) => {
   try {
     res.render("rech_app", {
       title: "Recharge Approval",
@@ -413,7 +413,7 @@ router.get("/rech_app", async (req, res) => {
   }
 });
 
-router.get("/paymentManul", async (req, res) => {
+router.get("/paymentManul",authenticateToken, async (req, res) => {
   try {
     res.render("paymentManul", {
       title: "paymentManul",
@@ -426,11 +426,11 @@ router.get("/paymentManul", async (req, res) => {
   }
 });
 
-router.get("/Ludo", (req, res) => {
+router.get("/Ludo",authenticateToken, (req, res) => {
   res.render("Ludo", { title: "Ludo", currentRoute: req.url });
 });
 
-router.get("/Carrom", async (req, res) => {
+router.get("/Carrom", authenticateToken,async (req, res) => {
   try {
     res.render("Carrom", {
       title: "Carrom",
@@ -443,7 +443,7 @@ router.get("/Carrom", async (req, res) => {
   }
 });
 
-router.get("/Slide", async (req, res) => {
+router.get("/Slide",authenticateToken, async (req, res) => {
   try {
     res.render("Slide", {
       title: "Reject",
@@ -456,7 +456,7 @@ router.get("/Slide", async (req, res) => {
   }
 });
 
-router.get("/with_re", async (req, res) => {
+router.get("/with_re",authenticateToken, async (req, res) => {
   try {
     
     res.render("with_re", {
@@ -470,7 +470,7 @@ router.get("/with_re", async (req, res) => {
     res.render("error", { error: "Failed to fetch game prices" });
   }
 });
-router.get("/with_app", async (req, res) => {
+router.get("/with_app",authenticateToken, async (req, res) => {
   try {
     
     res.render("with_app", {
@@ -483,7 +483,7 @@ router.get("/with_app", async (req, res) => {
     res.render("error", { error: "Failed to fetch game prices" });
   }
 });
-router.get("/mail", async (req, res) => {
+router.get("/mail",authenticateToken, async (req, res) => {
   try {
  
     res.render("mail_page", {
@@ -496,7 +496,7 @@ router.get("/mail", async (req, res) => {
     res.render("error", { error: "Failed to fetch game prices" });
   }
 });
-router.get("/mailBonus", async (req, res) => {
+router.get("/mailBonus",authenticateToken, async (req, res) => {
   try {
     res.render("mailPageBonus", {
       title: "Approval",
@@ -509,7 +509,7 @@ router.get("/mailBonus", async (req, res) => {
     res.render("error", { error: "Failed to fetch User" });
   }
 });
-router.get("/SingleMalForUser/:id", async (req, res) => {
+router.get("/SingleMalForUser/:id",authenticateToken, async (req, res) => {
   try {
     // Make a GET request to the GamePriceGet API  fetchSingleUserMailData
     const { id } = req.params;
@@ -524,7 +524,7 @@ router.get("/SingleMalForUser/:id", async (req, res) => {
   }
 });
 
-router.get("/with_rej", async (req, res) => {
+router.get("/with_rej", authenticateToken,async (req, res) => {
   try {
     res.render("with_rej", {
       title: "Approval",
@@ -537,7 +537,7 @@ router.get("/with_rej", async (req, res) => {
   }
 });
 
-router.get("/festival", async (req, res) => {
+router.get("/festival",authenticateToken, async (req, res) => {
   try {
   
     res.render("festival", {
@@ -551,22 +551,22 @@ router.get("/festival", async (req, res) => {
   }
 });
 
-router.post("/UserloginData", UserloginData);
+router.post("/UserloginData",authenticateToken, UserloginData);
 // withdrwa reject and request post router
 
 //add admin
-router.post("/AddAdmin", AddAdmin);
+router.post("/AddAdmin",authenticateToken, AddAdmin);
 
 // update admin
-router.post("/users-profile", UploadImgMulter, UpdateAdmin);
+router.post("/users-profile",authenticateToken, UploadImgMulter, UpdateAdmin);
 
 //getAdmin
-router.get("/AdminData", GetAdminUser);
+router.get("/AdminData",authenticateToken, GetAdminUser);
 
 // change admin password
-router.post("/ChangeAdminPassword", ChangeAdminPassword);
+router.post("/ChangeAdminPassword",authenticateToken, ChangeAdminPassword);
 //delete admin profile img router
-router.post("/DeleteAdminImg", DeleteAdminImg);
+router.post("/DeleteAdminImg",authenticateToken, DeleteAdminImg);
 
 // router.post("/profitmulti",Admin.BatXupdate)
 // router.get("/batdata",Logic.AdminSending);

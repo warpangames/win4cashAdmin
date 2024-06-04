@@ -28,7 +28,8 @@
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-unity"></i>
                     </div>
-                    <div class="ps-3">
+                    <div class="ps-3 totalUser" style="font-size: 25px;font-weight: bold;">
+                      
                     </div>
                   </div>
                 </div>
@@ -44,7 +45,8 @@
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-arrow-down-right"></i>
                     </div>
-                    <div class="ps-3">
+                    <div class="ps-3 PandingWithdraw" style="font-size: 25px;font-weight: bold;">
+                     
                     </div>
                   </div>
                 </div>
@@ -62,7 +64,7 @@
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-arrow-up-right"></i>
                     </div>
-                    <div class="ps-3">
+                    <div class="ps-3 SuccessWithdraw"  style="font-size: 25px;font-weight: bold;">
 
                     </div>
                   </div>
@@ -209,6 +211,22 @@
         </div><!-- End Right side columns -->
 
       </div>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script>
+        const getData = async ()=>{
+          const user = document.querySelector('.totalUser');
+          const panding = document.querySelector('.PandingWithdraw');
+          const success = document.querySelector('.SuccessWithdraw');
+          const res = await axios.get('http://localhost:7000/admin/count');
+          if(res.status==200){
+            user.innerHTML = res.data.totaluser;
+            panding.innerHTML = res.data.pendingreq;
+            success.innerHTML = res.data.accpetreq;
+          }
+          console.log(res,'res')
+        }
+        getData()
+      </script>
     </section>
 
   </main><!-- End #main -->

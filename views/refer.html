@@ -284,7 +284,7 @@
     const formData = {
       child, firstParent, SecondParent ,ThirdParent 
     };
-    fetch('http://localhost:5000/ReferErnData', {
+    fetch('https://admin.win4cash.in/ReferErnData', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -316,7 +316,7 @@ const submitForm2 = async(event)=> {
     const formData = {
       FixedAmount,
     };
-    fetch('http://localhost:5000/ReferEarnFixedAmt', {
+    fetch('https://admin.win4cash.in/ReferEarnFixedAmt', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -347,7 +347,7 @@ document.addEventListener('DOMContentLoaded', function () {
           Id
         };
         // Send a POST request to delete the slider image
-        fetch(`http://localhost:5000/DeletereReferEarn`, {
+        fetch(`https://admin.win4cash.in/DeletereReferEarn`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function () {
           Id
         };
         // Send a POST request to delete the slider image
-        fetch(`http://localhost:5000/DeletereReferEarnfixedData`, {
+        fetch(`https://admin.win4cash.in/DeletereReferEarnfixedData`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

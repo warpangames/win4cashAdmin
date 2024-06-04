@@ -166,7 +166,7 @@
       
         console.log(formData)
         // Fetch API to send the FormData object
-        fetch(`http://localhost:5000/updateSlider`, {
+        fetch(`https://admin.win4cash.in/updateSlider`, {
             method: 'POST',
             body: formData ,
         })
@@ -204,7 +204,7 @@
             formData.append("SliderName", Name);
             formData.append("SliderImg", slideImg);
             // Fetch API to send the FormData object
-            fetch(`http://localhost:5000/uploadimg`, {
+            fetch(`https://admin.win4cash.in/uploadimg`, {
                 method: 'POST',
                 body: formData
             })
@@ -235,7 +235,7 @@
             sliderImageId
         };
         // Send a POST request to delete the slider image
-        fetch(`http://localhost:5000/SliderimgDelete`, {
+        fetch(`https://admin.win4cash.in/SliderimgDelete`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

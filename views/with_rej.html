@@ -15,17 +15,17 @@
             <div class="card-body">
             
               <!-- Table with stripped rows -->
-              <table class="table datatable" id="withdrawTable">
+              <table class="table datatable" id="withdrawTable1">
                 <thead>
                   <tr>
-                    <th scope="col">Tran.id</th>
+                    <th scope="col">S.No.</th>
                     <th scope="col">Mobile</th>
                     <th scope="col">Username</th>
                     <th scope="col">Amount</th>
                     <th scope="col">BankName</th>
                     <th scope="col">IFSC</th>
                     <th scope="col">Acc.No</th>
-                    <th scope="col">UpiAdd.</th>
+                    <th scope="col">Date</th>
                     <th scope="col">status</th>
                 </tr>
                 </thead>
@@ -39,6 +39,59 @@
 
         </div>
       </div>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const tableBody = document.querySelector('#withdrawTable1 tbody');
+      
+        fetch('http://localhost:7000/admin/rejectreq')
+          .then(response => response.json())
+          .then(data => {
+            console.log(data,'data');
+            data.forEach((user,index) => {
+              // user.forEach(withdraw => {
+                if (true) {
+                  const tableRow = document.createElement('tr');
+                  tableRow.innerHTML = `
+                    <td>${index+1}</td>
+                    <td>${user.details[0].phoneno}</td>
+                    <td>${user.Username}</td>
+                    <td id="withdrawAmount">${user.Requestedammount}</td>
+                    <td>${user.details[0].bankname}</td>
+                    <td>${user.details[0].IFSC||'0'}</td>
+                    <td>${user.details[0].Accountno}</td>
+                    <td>${user.createdAt}</td>
+                    <td>${user.satuts}</td>
+                    
+                    <!-- Add any additional columns or actions here -->
+                  `;
+                  // const pencilIcon = tableRow.querySelector('.bi-pencil-square');
+                  // pencilIcon.addEventListener('click', function () {
+                  //   const userId = pencilIcon.getAttribute('data-id');
+                  //   const selectedRowData = JSON.parse(pencilIcon.getAttribute('data-row'));
+                  //   const amountElement = tableRow.querySelector('#withdrawAmount');
+                  //   const amount = amountElement.textContent; // Get the text content of the element
+                   
+                  //   // console.log('Amount:', amount);
+                  //   // Trigger the modal display
+                  //   $('#exampleModal1').modal('show');
+                  //   // alert(amount)
+                  //   // Update the selected data in the modal when the "Save" button is clicked
+                  //   const saveButton = document.getElementById('saveButton');
+                    
+                  //   saveButton.addEventListener('click', function () {
+                  //     const selectedOption = document.getElementById('inputState').value;
+                  //     handleModalFormSubmission(selectedOption, selectedRowData, userId, amount);
+                  //   });
+                  // });
+                  tableBody.appendChild(tableRow);
+                }
+              // });
+            });
+          })
+          .catch(error => console.error('Error fetching data:', error));
+      });
+      </script>
     </section>
 <!-- deltet modal -->
 <div class="text-center">

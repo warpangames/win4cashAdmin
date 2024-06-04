@@ -7,12 +7,12 @@ const sidebarLinks = [
   //   icon: "bi bi-person-vcard-fill",
   //   active: false,
   // },
-  // {
-  //   name: "Player Master",
-  //   route: "/player",
-  //   icon: "bi bi-people-fill",
-  //   active: false
-  // },
+  {
+    name: "Player Master",
+    route: "/player",
+    icon: "bi bi-people-fill",
+    active: false
+  },
 
   {
     name: "Profile",
@@ -73,18 +73,18 @@ const sidebarLinks = [
     ]
   },
   {
-    name: "Bet Control",
+    name: "Manual_Transaction",
     icon: "bi bi-layout-text-window-reverse",
     active: false,
     submenu: [
       {
-        name: "Winner Control",
+        name: "Man. Recharge Request",
         route: "/Man_rech_pe",
         icon: "bi bi-circle",
         active: false
       },
       {
-        name: "Retrun Control",
+        name: "Man. Recharge Approval",
         route: "/Man_rech_app",
         icon: "bi bi-circle",
         active: false

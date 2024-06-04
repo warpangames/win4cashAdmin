@@ -104,7 +104,7 @@ exports.UserloginData = async (req, res, next) => {
   // console.log(req.body);
   // console.log(username, userphone, reffralcode, usereffral, userotp);
   const responseEarn = await axios.get(
-    "http://localhost:5000/ReferErnDataGet"
+    "https://admin.win4cash.in/ReferErnDataGet"
   );
   const ReferEarndataa = responseEarn.data;
   const UserBonusData = ReferEarndataa[0]?.newuser || 0;
@@ -119,24 +119,24 @@ exports.UserloginData = async (req, res, next) => {
   const ThirdBonusKey = "Third Parent";
   const FourBonusKey = "Four Parent";
   const getDailyDayBonusData = await axios.get(
-    "http://localhost:5000/getdailyBonusDatas"
+    "https://admin.win4cash.in/getdailyBonusDatas"
   );
   const DayBonus = getDailyDayBonusData.data;
   // console.log(DayBonus);H
   const res_data_of_newuser_bonas = await axios.get(
-    `http://localhost:5000/referwin_Getdata`
+    `https://admin.win4cash.in/referwin_Getdata`
   );
   const firstDataObject = res_data_of_newuser_bonas.data[0];
   const newuser_singin = firstDataObject.newuser;
   const referUser_bonus = firstDataObject.referUser;
   const refer_bonus = firstDataObject.refer;
   const festivalgetAlldata = await axios.get(
-    `http://localhost:5000/festivalgetAlldata`
+    `https://admin.win4cash.in/festivalgetAlldata`
   );
   const festivalData = festivalgetAlldata.data || "";
 
   const MailDataall = await axios.get(
-    `http://localhost:5000/MailHistorySchemaData`
+    `https://admin.win4cash.in/MailHistorySchemaData`
   );
   const MailData = MailDataall.data || "";
 
@@ -733,7 +733,7 @@ exports.withdraw = async (req, res, next) => {
     const { Amount, uniqeId, PhoneNumber, UserName, IFSC } = req.body;
 
     const WithdrawDataFinalValue = await axios.get(
-      "http://localhost:5000/WithdrawTextDatagetData"
+      "https://admin.win4cash.in/WithdrawTextDatagetData"
     );
     const WithdraTextVal = WithdrawDataFinalValue.data;
 
@@ -855,7 +855,7 @@ exports.validatebinding = async (req, res, next) => {
 //binding submit form controller
 exports.BindingData = async (req, res, next) => {
   const res_data_of_newuser_bonas = await axios.get(
-    `http://localhost:5000/referwin_Getdata`
+    `https://admin.win4cash.in/referwin_Getdata`
   );
   const firstDataObject = res_data_of_newuser_bonas.data[0];
   const newuser_singin = firstDataObject.newuser;
@@ -1031,16 +1031,16 @@ exports.updateotp = async (req, res, next) => {
 //play as guest  datasave process
 exports.PlayasGuest = async (req, res, next) => {
   const festivalgetAlldata = await axios.get(
-    `http://localhost:5000/festivalgetAlldata`
+    `https://admin.win4cash.in/festivalgetAlldata`
   );
   const festivalData = festivalgetAlldata.data || "";
   const getDailyDayBonusData = await axios.get(
-    "http://localhost:5000/getdailyBonusDatas"
+    "https://admin.win4cash.in/getdailyBonusDatas"
   );
   const DayBonus = getDailyDayBonusData.data;
   // console.log("datatattaa", getDailyDayBonusData.data);
   const MailDataall = await axios.get(
-    `http://localhost:5000/MailHistorySchemaData`
+    `https://admin.win4cash.in/MailHistorySchemaData`
   );
   const MailData = MailDataall.data || "";
   try {
@@ -2653,19 +2653,19 @@ exports.PaymentHistorUpdate = async (req, res) => {
   const { userId, orderId, status } = req.body;
   // console.log(userId, orderId, status);
   const responseFixeddata = await axios.get(
-    "http://localhost:5000/ReferWinDataFixedAmtgetdata"
+    "https://admin.win4cash.in/ReferWinDataFixedAmtgetdata"
   );
   const resFixeddata = responseFixeddata.data;
   const fixedAmountOfWin = resFixeddata[0]?.FixedAmount || 0;
 
   const responseFixeddataofEarn = await axios.get(
-    "http://localhost:5000/ReferEarnFixedAmtgetData"
+    "https://admin.win4cash.in/ReferEarnFixedAmtgetData"
   );
   const resFixeddataern = responseFixeddataofEarn.data;
   const fixedAmountOfEarn = resFixeddataern[0]?.FixedAmount || 0;
 
   const responseWin = await axios.get(
-    "http://localhost:5000/ReferWinDataGet"
+    "https://admin.win4cash.in/ReferWinDataGet"
   );
   const vresponseWinData = responseWin.data;
   const UserWinData = vresponseWinData[0]?.child || 0;
@@ -2679,7 +2679,7 @@ exports.PaymentHistorUpdate = async (req, res) => {
   const ThirdBonusWinKey = "Third Parent Win Bonus";
 
   const responseEarn = await axios.get(
-    "http://localhost:5000/ReferErnDataGet"
+    "https://admin.win4cash.in/ReferErnDataGet"
   );
   const ReferEarndataa = responseEarn.data;
   const UserBonusData = ReferEarndataa[0]?.newuser || 0;

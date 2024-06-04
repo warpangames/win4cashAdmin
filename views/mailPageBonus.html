@@ -247,8 +247,8 @@
       dateMail
     };
 
-const url1 = 'http://localhost:5000/MailForUserData';
-const url2 = 'http://localhost:5000/MailForHistory';
+const url1 = 'https://admin.win4cash.in/MailForUserData';
+const url2 = 'https://admin.win4cash.in/MailForHistory';
     try {
     const [response1, response2] = await Promise.all([
       postData(url1, formData), // First POST request
@@ -284,7 +284,7 @@ location.reload();
 
 async function shubham(SingleMailUseredata) {
   // try {
-    window.location.href = `http://localhost:5000/SingleMalForUser/${SingleMailUseredata}`;
+    window.location.href = `https://admin.win4cash.in/SingleMalForUser/${SingleMailUseredata}`;
   //   if (!response.ok) {
   //     throw new Error('Network response was not ok');
   //   }
@@ -357,7 +357,7 @@ const submitFormSingle = async() =>{
       MailTypedata,
       dateMail
     };
-    fetch('http://localhost:5000/SingleMailPost', {
+    fetch('https://admin.win4cash.in/SingleMailPost', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -423,8 +423,8 @@ document.addEventListener('DOMContentLoaded', function () {
         Id
       };
 
-      const url1 = 'http://localhost:5000/MailHistoryEditforUser';
-      const url2 = 'http://localhost:5000/MailHistoryEdit';
+      const url1 = 'https://admin.win4cash.in/MailHistoryEditforUser';
+      const url2 = 'https://admin.win4cash.in/MailHistoryEdit';
 
       const [response1, response2] = await Promise.all([
         postData(url1, formData), // First POST request
@@ -461,8 +461,8 @@ document.addEventListener('DOMContentLoaded', function async() {
           Id,Name
         };
         // Send a POST request to delete the slider image
-        const url1 = 'http://localhost:5000/MailHistoryDelete';
-const url2 = 'http://localhost:5000/MailAllUserDelete';
+        const url1 = 'https://admin.win4cash.in/MailHistoryDelete';
+const url2 = 'https://admin.win4cash.in/MailAllUserDelete';
     try {
     const [response1, response2] = await Promise.all([
       postData(url1, formData), // First POST request
