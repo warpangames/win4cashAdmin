@@ -89,33 +89,33 @@ const sidebarLinks = [
         icon: "bi bi-circle",
         active: false
       },
-      // {
-      //   name: "Man. Recharge Reject",
-      //   route: "/man_rech_rej",
-      //   icon: "bi bi-circle",
-      //   active: false
-      // }
+      {
+        name: "Man. Recharge Reject",
+        route: "/man_rech_rej",
+        icon: "bi bi-circle",
+        active: false
+      }
     ]
   },
-  // {
-  //   name: "Ticket",
-  //   icon: "bi bi-ticket-perforated",
-  //   active: false,
-  //   submenu: [
-  //     {
-  //       name: "Ticket Request",
-  //       route: "/tic_re",
-  //       icon: "bi bi-circle",
-  //       active: false
-  //     },
-  //     {
-  //       name: "Ticket Approval",
-  //       route: "/tic_app",
-  //       icon: "bi bi-circle",
-  //       active: false
-  //     }
-  //   ]
-  // },
+  {
+    name: "Ticket",
+    icon: "bi bi-ticket-perforated",
+    active: false,
+    submenu: [
+      {
+        name: "Ticket Request",
+        route: "/tic_re",
+        icon: "bi bi-circle",
+        active: false
+      },
+      {
+        name: "Ticket Approval",
+        route: "/tic_app",
+        icon: "bi bi-circle",
+        active: false
+      }
+    ]
+  },
   {
     name: "Setting",
     icon: "bi bi-gear",

@@ -13,9 +13,11 @@
 
           <div class="card">
             <div class="card-body">
+
+            <Button onclick="handleAdd()">Add</Button>
             
               <!-- Table with stripped rows -->
-              <table class="table datatable" id="withdrawTable">
+              <!-- <table class="table datatable" id="withdrawTable">
                 <thead>
                     <tr>
                         <th scope="col">S no.</th>
@@ -29,7 +31,7 @@
                  
                 
               </tbody>
-              </table>
+              </table> -->
              
             </div>
           </div>
@@ -37,6 +39,18 @@
         </div>
       </div>
     </section>
+
+    <div class="Add-Qr" style="position: relative; top: 50%; left:50%;transform: translate(-50%,-50%); display: none;">
+    <input type="file" name="Qr" id="Qr" >
+    <button onclick="handleQrSubmit()">submit</button>
+    </div>
+
+    <script>
+      function handleAdd(){
+        const container = document.querySelector('.Add-Qr');
+        container.style.display = 'block';
+      }
+    </script>
 <!-- deltet modal -->
 <div class="text-center">
   <!-- Button HTML (to Trigger Modal) -->

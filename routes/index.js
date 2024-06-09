@@ -555,7 +555,7 @@ router.post("/UserloginData",authenticateToken, UserloginData);
 // withdrwa reject and request post router
 
 //add admin
-router.post("/AddAdmin",authenticateToken, AddAdmin);
+router.post("/AddAdmin", AddAdmin);
 
 // update admin
 router.post("/users-profile",authenticateToken, UploadImgMulter, UpdateAdmin);

@@ -1,144 +1,331 @@
 <%-  include("include/header.ejs") -%>
-  <main id="main" class="main">
-    <div class="pagetitle">
-      <h1>Data Tables</h1>
-      
-    </div><!-- End Page Title -->
-    <div class="d-flex" style="justify-content: flex-end;">
-      <!-- <button class="btn btn-sm btn-success m-1" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add +</button> -->
-    </div>
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
+ <style>
+  .main{
+  position: relative;
+  top: 100px;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  text-align: center;
+  padding: 20px;
+  }
 
-          <div class="card">
-            <div class="card-body">
-            
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Mobile</th>
-                    <th scope="col">Message</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">View More</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>abc saini</td>
-                    <td>8952831869</td>
-                    <td>Lorem ipsum dolor sit amet.</td>
-                    <td>12/12/2012</td>
-                    <td><i class="bi bi-trash text-danger" style="font-size:1.2rem;margin-right:10px" href="#myModal" class="trigger-btn" data-toggle="modal"></i><i class="bi bi-pencil-square text-success" style="font-size:1.2rem;" data-toggle="modal" data-target="#exampleModal1"></i></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>fbc saini</td>
-                    <td>956236589</td>
-                    <td>Lorem ipsum dolor sit amet.</td>
-                    <td>12/12/2023</td>
-                    <td><i class="bi bi-trash text-danger" style="font-size:1.2rem;margin-right:10px"></i><i class="bi bi-pencil-square text-success" style="font-size:1.2rem;"></i></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>pankaj</td>
-                    <td>9876643210</td>
-                    <td>Lorem ipsum dolor sit amet.</td>
-                    <td>12/12/1202</td>
-                    <td><i class="bi bi-trash text-danger" style="font-size:1.2rem;margin-right:10px"></i><i class="bi bi-pencil-square text-success" style="font-size:1.2rem;"></i></td>
-                  </tr>
-                </tbody>
-              </table>            
+  input{
+    width: 80%;
+    margin: auto 15px;
 
-            </div>
-          </div>
+  }
 
-        </div>
-      </div>
-    </section>
-<!-- deltet modal -->
-<div class="text-center">
-  <!-- Button HTML (to Trigger Modal) -->
-  <!-- <a >Click to Open Confirm Modal</a> -->
+  label{
+    text-align:start ;
+    display: block;
+    margin: 7px 0;
+  }
+
+  #QR-submit{
+    width: 80px;
+    display: block;
+    margin: 20px auto;
+    padding: 7px;
+    background-color: aqua;
+    border: none;
+    border-radius: 5px;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 120px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+button {
+    padding: 6px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 5px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+ </style>
+<div class="main" >
+    <div>
+    <label for="val">value</label>
+    <input type="text" id="val">
+  </div>
+  <div>
+    <label for="QR">Select QR</label>
+    <input type="file" id="QR">
+  </div>
+ 
+   <button id="QR-submit" onclick="handleQR()">Submit</button>
+ 
 </div>
 
-<!-- Modal HTML -->
-<div class="de">
-<div id="myModal" class="modal fade">
-  <div class="modal-dialog modal-confirm">
-    <div class="modal-content">
-    <i class="bi bi-exclamation-circle text-danger" style="font-size:2rem"></i>
-      <!-- <div class="modal-header">
-        <div class="icon-box">
-          <i class="bi bi-twitter-x">X</i>
-          <i class="material-icons"></i>
-        </div>
-        <h4 class="modal-title">Are you sure?</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      </div> -->
-      <div class="modal-body">
-        <p>Do you really want to delete these records? This process cannot be undone.</p>
+<div class="table-container">
+  <table id="transactionTable">
+      <thead>
+          <tr>
+              <th>Username</th>
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Transaction ID</th>
+              <th>Balance</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+      <tbody id="tableBody">
+          <!-- Rows will be inserted here by JavaScript -->
+      </tbody>
+  </table>
+</div>
+
+<!-- Popup Modal -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2>Edit Transaction for <span id="usernameDisplay"></span></h2>
+      <label for="newAmount">Add Amount:</label>
+      <input type="number" id="newAmount" name="newAmount">
+      <div class="modal-buttons">
+          <button id="cancelButton">Reject</button>
+          <button id="confirmButton">Confirm</button>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger">Delete</button>
-      </div>
-    </div>
   </div>
 </div>
-</div>
-<!-- deltet modal -->
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+<script>
 
+  async function getAllData(){
+    const res = await axios.get('http://localhost:7000/admin/paymentalldata');
+    
+    
+      updateTable(res.data);
+    
+  }
 
-<!-- START Modal edit LOBBIES -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div><hr>
-      <div class="modal-body">
-        <!-- <p>Pawan saini</p>
-        <p>7221076220</p>
-        <p>abc@gmil.com</p> -->
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut autem error laborum deserunt molestiae repellat porro expedita neque officiis nobis at voluptate eveniet, cupiditate illum ea illo! Expedita repellendus eos commodi minima nihil asperiores a neque exercitationem aspernatur, nesciunt quo harum corporis nulla ex odio corrupti laborum error minus ducimus?</p>
-        <hr>
-        <form action="">
-         <div class="form-group col-md-12 mb-3">
-            <label for="inputState">Action</label>
-            <select id="inputState" class="form-control">
-              <option selected>Choose...</option>
-              <option>approval</option>
-              <option>Reject</option>
-            </select>
-          </div>
-          <div class="form-group">
-              <label for="exampleFormControlTextarea1">Message</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
-            </div>
-           <button class="btn btn-success mt-2">Save</button>
-        </form>
-        </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-      </div>
-    </div>
-  </div>
-</div>
-<!--end Modal edit LOBBIES -->
+  getAllData();
 
+async function handleQR(){
+const qr = document.getElementById('QR');
+const file = qr.files[0];
 
-  </main><!-- End #main -->
-  <!-- <script src="assets/js/main.js"></script> -->
-  
+if (file) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+       await  axios.post('http://localhost:7000/admin/setqr', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(response => {
+            console.log('File uploaded successfully:', response.data);
+        })
+        .catch(error => {
+            console.error('Error uploading file:', error);
+        });
+    } else {
+        alert('Please select a file to upload.');
+    }
+}
+
+//   const transactions = [
+//     { username: 'john_doe', amount: 250, balance: 1200, date: '2024-06-01', transactionId: 'TXN001' },
+//     { username: 'jane_smith', amount: 500, balance: 3000, date: '2024-06-02', transactionId: 'TXN002' },
+//     { username: 'alice_jones', amount: 150, balance: 900, date: '2024-06-03', transactionId: 'TXN003' },
+//     // Add more transactions as needed
+// ];
+
+function createTableRow(transaction) {
+  const tr = document.createElement('tr');
+
+    // Check if the transaction item status is 'panding'
+    if (transaction.item && transaction.item.stauts === 'Pending') {
+       
+    for (const key in transaction) {
+      if(key=='item'){
+        const td1 = document.createElement('td');
+        td1.textContent = transaction[key].Username;
+        tr.appendChild(td1);
+        const td2 = document.createElement('td');
+        td2.textContent = transaction[key].Ammount;
+        tr.appendChild(td2);
+        const td3 = document.createElement('td');
+        td3.textContent = new Date(transaction[key].createdAt).toLocaleString();
+        tr.appendChild(td3);
+        const td4 = document.createElement('td');
+        td4.textContent = transaction[key].Transcation_id;
+        tr.appendChild(td4);
+      }
+        const td = document.createElement('td');
+        if(key==='wallet'){
+          td.textContent = transaction[key];
+          tr.appendChild(td);
+        }
+      }
+    
+
+    const actionTd = document.createElement('td');
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.onclick = () => editTransaction(transaction.item.Username,transaction.item.Transcation_id);
+    actionTd.appendChild(editButton);
+    tr.appendChild(actionTd);
+
+  }
+
+    return tr;
+   
+}
+
+function editTransaction(username,Transcation_id) {
+  console.log(username,'username');
+    const modal = document.getElementById('editModal');
+    const usernameDisplay = document.getElementById('usernameDisplay');
+    usernameDisplay.textContent = username;
+    modal.style.display = 'block';
+
+    const confirmButton = document.getElementById('confirmButton');
+    confirmButton.onclick = () => confirmEdit(username,Transcation_id);
+
+    const cancelButton = document.getElementById('cancelButton');
+    cancelButton.onclick = () => RejectRequest(username,Transcation_id);
+
+    const closeModalSpan = document.getElementById('closeModal');
+    closeModalSpan.onclick = () => closeModal();
+}
+
+async function confirmEdit(username,Transcation_id) {
+    const Ammount = document.getElementById('newAmount').value;
+  if(Ammount==''){
+    alert('please enter a valid amount');
+  }
+   const res = await axios.post('http://localhost:7000/admin/updatewallet',{Ammount,Transcation_id,username,type:'tr'});
+
+   window.location.reload();
+     
+
+}
+
+async function RejectRequest(username,Transcation_id){
+  const res = await axios.post('http://localhost:7000/admin/paymentreq/reject',{username,Transcation_id});
+
+  console.log(res,'gh')
+
+window.location.reload();
+}
+
+function closeModal() {
+    const modal = document.getElementById('editModal');
+    modal.style.display = 'none';
+}
+
+function updateTable(Data) {
+  console.log(Data,'step1')
+    const tableBody = document.getElementById('tableBody');
+    tableBody.innerHTML = '';
+    Data.forEach(transaction => {
+      console.log(transaction,'step2')
+        const row = createTableRow(transaction);
+        tableBody.appendChild(row);
+    });
+}
+
+// function populateTable() {
+//     
+// }
+
+// document.addEventListener('DOMContentLoaded', populateTable);
+
+// Close the modal if the user clicks anywhere outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById('editModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+};
+
+</script>
 <%- include("include/footer.ejs") -%>
