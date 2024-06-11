@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
               <td>${user.details[0].IFSC||'0'}</td>
               <td>${user.details[0].Accountno}</td>
               <td>${user.Walletammount}</td>
-              <td>${user.createdAt}</td>
+              <td>${new Date(user.createdAt).toLocaleString()}</td>
               <td>${user.satuts}</td>
              
               <!-- Add any additional columns or actions here -->
