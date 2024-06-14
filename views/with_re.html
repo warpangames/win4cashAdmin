@@ -58,10 +58,10 @@
    let status;
 
    if (selectedOption === 'approval') {
-      apiUrl = 'https://win4cash.in/admin/withrawreq/satuts';
+      apiUrl = 'http://localhost:7000/admin/withrawreq/satuts';
       status = 'accepted';
    } else if (selectedOption === 'Reject') {
-      apiUrl = 'https://win4cash.in/admin/withrawreq/satuts';
+      apiUrl = 'http://localhost:7000/admin/withrawreq/satuts';
       status = 'rejected';
    }
 
@@ -96,7 +96,7 @@ const requestBody = {
 document.addEventListener('DOMContentLoaded', function () {
   const tableBody = document.querySelector('#withdrawTable tbody');
 
-  fetch('https://win4cash.in/admin/pendingreq')
+  fetch('http://localhost:7000/admin/pendingreq')
     .then(response => response.json())
     .then(data => {
       console.log(data,'data');

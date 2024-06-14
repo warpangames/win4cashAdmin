@@ -178,7 +178,7 @@ button:hover {
 <script>
 
   async function getAllData(){
-    const res = await axios.get('https://win4cash.in/admin/paymentalldata');
+    const res = await axios.get('http://localhost:7000/admin/paymentalldata');
     
     
       updateTable(res.data);
@@ -195,7 +195,7 @@ if (file) {
         const formData = new FormData();
         formData.append('file', file);
 
-       await  axios.post('https://win4cash.in/admin/setqr', formData, {
+       await  axios.post('http://localhost:7000/admin/setqr', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -282,7 +282,7 @@ async function confirmEdit(username,Transcation_id) {
   if(Ammount==''){
     alert('please enter a valid amount');
   }
-   const res = await axios.post('https://win4cash.in/admin/updatewallet',{Ammount,Transcation_id,username,type:'tr'});
+   const res = await axios.post('http://localhost:7000/admin/updatewallet',{Ammount,Transcation_id,username,type:'tr'});
 
    window.location.reload();
      
@@ -290,7 +290,7 @@ async function confirmEdit(username,Transcation_id) {
 }
 
 async function RejectRequest(username,Transcation_id){
-  const res = await axios.post('https://win4cash.in/admin/paymentreq/reject',{username,Transcation_id});
+  const res = await axios.post('http://localhost:7000/admin/paymentreq/reject',{username,Transcation_id});
 
   console.log(res,'gh')
 

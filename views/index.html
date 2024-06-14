@@ -1,4 +1,58 @@
 <%-  include("include/header.ejs") -%>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+thead tr {
+    background-color: #f2f2f2;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+.pagination {
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    background-color: #ccc;
+}
+
+</style>
   <main id="main" class="main">
 
     <div class="pagetitle">
@@ -111,122 +165,124 @@
               </div><!-- End Customers Card -->
                 <!-- Customers Card -->
          
-
-            <!-- Reports -->
-            <div class="col-12">
-              <div class="card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-               
-            <!-- Top Selling -->
-            <div class="col-12">
-              <div class="card top-selling overflow-auto">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body pb-0">
-                  <h5 class="card-title">Top 5 <span>| Winner</span></h5>
-
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th scope="col">Preview</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Games</th>
-                        <th scope="col">Revenue</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="img/1.jpg" alt=""></a></th>
-                        <td>Abc saini</td>
-                        <td>7687778777</td>
-                        <td>24</td>
-                        <td>₹5,828</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="img/Profile.png" alt=""></a></th>
-                        <td>Pawan saini</td>
-                        <td>98456310</td>
-                        <td>20</td>
-                        <td>₹4,508</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="img/3.png" alt=""></a></th>
-                        <td>Ram pal</td>
-                        <td>741252589</td>
-                        <td>19</td>
-                        <td>₹4,366</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="img/4.png" alt=""></a></th>
-                        <td>Jone jat</td>
-                        <td>635269875</td>
-                        <td>25</td>
-                        <td>₹2,016</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="img/5.png" alt=""></a></th>
-                        <td>Naresh</td>
-                        <td>85632545</td>
-                        <td>10</td>
-                        <td>₹1,239</td>
-                      </tr>
-                    </tbody>
+                <div class="container">
+                  <input type="text" id="searchInput" placeholder="Search...">
+                  <table id="dataTable">
+                      <thead>
+                          <tr>
+                              <th>Username</th>
+                              <th>Password</th>
+                              <th>Phone No</th>
+                              <th>Bank Detail</th>
+                              <th>Created At</th>
+                              <th>Updated At</th>
+                              <th>Wallet</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody id="tableBody">
+                          <!-- Rows will be inserted here -->
+                      </tbody>
                   </table>
-
-                </div>
-
+                  <div class="pagination">
+                      <button id="prevBtn">Prev</button>
+                      <span id="pageInfo"></span>
+                      <button id="nextBtn">Next</button>
+                  </div>
               </div>
-            </div><!-- End Top Selling -->
-
-          </div>
-        </div><!-- End Left side columns -->
-
-
-        </div><!-- End Right side columns -->
-
+            <!-- Reports -->
+           
       </div>
       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
       <script>
+       
+        document.addEventListener('DOMContentLoaded', function () {
+
+          let data;
+        let currentPage = 1;
         const getData = async ()=>{
           const user = document.querySelector('.totalUser');
           const panding = document.querySelector('.PandingWithdraw');
           const success = document.querySelector('.SuccessWithdraw');
-          const res = await axios.get('https://win4cash.in/admin/count');
+          const res = await axios.get('http://localhost:7000/admin/count');
           if(res.status==200){
             user.innerHTML = res.data.totaluser;
             panding.innerHTML = res.data.pendingreq;
             success.innerHTML = res.data.accpetreq;
+            data = res.data.user;
           }
+          renderTable(data, currentPage);
           console.log(res,'res')
         }
-        getData()
+        getData();
+
+
+    const rowsPerPage = 5;
+    let filteredData = data;
+
+    const tableBody = document.getElementById('tableBody');
+    const searchInput = document.getElementById('searchInput');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const pageInfo = document.getElementById('pageInfo');
+
+    function renderTable(data, page) {
+        tableBody.innerHTML = '';
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        const pageData = data.slice(start, end);
+
+        pageData.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.Username}</td>
+                <td>${item.Password}</td>
+                <td>${item.Phoneno}</td>
+                <td>${item.bankdetail}</td>
+                <td>${new Date(item.createdAt).toLocaleString()}</td>
+                <td>${new Date(item.updatedAt).toLocaleString()}</td>
+                <td>${item.wallet}</td>
+                <td><button onclick="editRow('${item.Username}')">Edit</button></td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        pageInfo.textContent = `Page ${page} of ${Math.ceil(data.length / rowsPerPage)}`;
+        prevBtn.disabled = page === 1;
+        nextBtn.disabled = page === Math.ceil(data.length / rowsPerPage);
+    }
+
+    function editRow(username) {
+        alert(`Edit user: ${username}`);
+    }
+
+    function searchTable() {
+        const query = searchInput.value.toLowerCase();
+        filteredData = data.filter(item => {
+            return Object.values(item).some(val => String(val).toLowerCase().includes(query));
+        });
+        currentPage = 1;
+        renderTable(filteredData, currentPage);
+    }
+
+    searchInput.addEventListener('input', searchTable);
+    prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderTable(filteredData, currentPage);
+        }
+    });
+    nextBtn.addEventListener('click', () => {
+        if (currentPage < Math.ceil(filteredData.length / rowsPerPage)) {
+            currentPage++;
+            renderTable(filteredData, currentPage);
+        }
+    });
+
+});
+
       </script>
+
     </section>
 
   </main><!-- End #main -->
