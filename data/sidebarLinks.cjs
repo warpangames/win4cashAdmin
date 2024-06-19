@@ -47,44 +47,44 @@ const sidebarLinks = [
     ]
   },
 
+  // {
+  //   name: "Recharge",
+  //   icon: "bi bi-layout-text-window-reverse",
+  //   active: false,
+  //   submenu: [
+  //     {
+  //       name: "Recharge Request",
+  //       route: "/rech_pe",
+  //       icon: "bi bi-circle",
+  //       active: false
+  //     },
+  //     {
+  //       name: "Recharge Approval",
+  //       route: "/rech_app",
+  //       icon: "bi bi-circle",
+  //       active: false
+  //     },
+  //     {
+  //       name: "Recharge Reject",
+  //       route: "/rech_rej",
+  //       icon: "bi bi-circle",
+  //       active: false
+  //     }
+  //   ]
+  // },
   {
-    name: "Recharge",
+    name: "Manual",
     icon: "bi bi-layout-text-window-reverse",
     active: false,
     submenu: [
       {
-        name: "Recharge Request",
-        route: "/rech_pe",
-        icon: "bi bi-circle",
-        active: false
-      },
-      {
-        name: "Recharge Approval",
-        route: "/rech_app",
-        icon: "bi bi-circle",
-        active: false
-      },
-      {
-        name: "Recharge Reject",
-        route: "/rech_rej",
-        icon: "bi bi-circle",
-        active: false
-      }
-    ]
-  },
-  {
-    name: "Manual_Transaction",
-    icon: "bi bi-layout-text-window-reverse",
-    active: false,
-    submenu: [
-      {
-        name: "Man. Recharge Request",
+        name: "Result",
         route: "/Man_rech_pe",
         icon: "bi bi-circle",
         active: false
       },
       {
-        name: "Man. Recharge Approval",
+        name: "Return",
         route: "/Man_rech_app",
         icon: "bi bi-circle",
         active: false
@@ -98,18 +98,18 @@ const sidebarLinks = [
     ]
   },
   {
-    name: "Ticket",
+    name: "Recharge",
     icon: "bi bi-ticket-perforated",
     active: false,
     submenu: [
       {
-        name: "Ticket Request",
+        name: "Request and QR",
         route: "/tic_re",
         icon: "bi bi-circle",
         active: false
       },
       {
-        name: "Ticket Approval",
+        name: "History",
         route: "/tic_app",
         icon: "bi bi-circle",
         active: false

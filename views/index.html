@@ -196,92 +196,93 @@ button:disabled {
       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
       <script>
        
-        document.addEventListener('DOMContentLoaded', function () {
+       document.addEventListener('DOMContentLoaded', function () {
 
-          let data;
-        let currentPage = 1;
-        const getData = async ()=>{
-          const user = document.querySelector('.totalUser');
-          const panding = document.querySelector('.PandingWithdraw');
-          const success = document.querySelector('.SuccessWithdraw');
-          const res = await axios.get('https://win4cash.in/admin/count');
-          if(res.status==200){
-            user.innerHTML = res.data.totaluser;
-            panding.innerHTML = res.data.pendingreq;
-            success.innerHTML = res.data.accpetreq;
-            data = res.data.user;
-          }
-          renderTable(data, currentPage);
-          console.log(res,'res')
-        }
-        getData();
+let data;
+let currentPage = 1;
+let filteredData = []; // Initialize filteredData
 
-
-    const rowsPerPage = 5;
-    let filteredData = data;
-
-    const tableBody = document.getElementById('tableBody');
-    const searchInput = document.getElementById('searchInput');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const pageInfo = document.getElementById('pageInfo');
-
-    function renderTable(data, page) {
-        tableBody.innerHTML = '';
-        const start = (page - 1) * rowsPerPage;
-        const end = start + rowsPerPage;
-        const pageData = data.slice(start, end);
-
-        pageData.forEach(item => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${item.Username}</td>
-                <td>${item.Password}</td>
-                <td>${item.Phoneno}</td>
-                <td>${item.bankdetail}</td>
-                <td>${new Date(item.createdAt).toLocaleString()}</td>
-                <td>${new Date(item.updatedAt).toLocaleString()}</td>
-                <td>${item.wallet}</td>
-                <td><button onclick="editRow('${item.Username}')">Edit</button></td>
-            `;
-            tableBody.appendChild(row);
-        });
-
-        pageInfo.textContent = `Page ${page} of ${Math.ceil(data.length / rowsPerPage)}`;
-        prevBtn.disabled = page === 1;
-        nextBtn.disabled = page === Math.ceil(data.length / rowsPerPage);
+const getData = async () => {
+    const user = document.querySelector('.totalUser');
+    const panding = document.querySelector('.PandingWithdraw');
+    const success = document.querySelector('.SuccessWithdraw');
+    const res = await axios.get('https://win4cash.in/admin/count');
+    if (res.status == 200) {
+        user.innerHTML = res.data.totaluser;
+        panding.innerHTML = res.data.pendingreq;
+        success.innerHTML = res.data.accpetreq;
+        data = res.data.user;
+        filteredData = data; // Initialize filteredData with all data
     }
+    renderTable(filteredData, currentPage);
+    console.log(res, 'res');
+};
 
-    function editRow(username) {
-        alert(`Edit user: ${username}`);
-    }
+getData();
 
-    function searchTable() {
-        const query = searchInput.value.toLowerCase();
-        filteredData = data.filter(item => {
-            return Object.values(item).some(val => String(val).toLowerCase().includes(query));
-        });
-        currentPage = 1;
+const rowsPerPage = 5;
+
+const tableBody = document.getElementById('tableBody');
+const searchInput = document.getElementById('searchInput');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const pageInfo = document.getElementById('pageInfo');
+
+function renderTable(data, page) {
+    tableBody.innerHTML = '';
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const pageData = data.slice(start, end);
+
+    pageData.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.Username}</td>
+            <td>${item.Password}</td>
+            <td>${item.Phoneno}</td>
+            <td>${item.bankdetail}</td>
+            <td>${new Date(item.createdAt).toLocaleString()}</td>
+            <td>${new Date(item.updatedAt).toLocaleString()}</td>
+            <td>${item.wallet}</td>
+            <td><button onclick="editRow('${item.Username}')">Edit</button></td>
+        `;
+        tableBody.appendChild(row);
+    });
+
+    pageInfo.textContent = `Page ${page} of ${Math.ceil(data.length / rowsPerPage)}`;
+    prevBtn.disabled = page === 1;
+    nextBtn.disabled = page === Math.ceil(data.length / rowsPerPage);
+}
+
+function editRow(username) {
+    alert(`Edit user: ${username}`);
+}
+
+function searchTable() {
+    const query = searchInput.value.trim().toLowerCase(); // Trim whitespace
+    filteredData = data.filter(item => {
+        return Object.values(item).some(val => String(val).toLowerCase().includes(query));
+    });
+    currentPage = 1;
+    renderTable(filteredData, currentPage);
+}
+
+searchInput.addEventListener('input', searchTable);
+prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
         renderTable(filteredData, currentPage);
     }
-
-    searchInput.addEventListener('input', searchTable);
-    prevBtn.addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            renderTable(filteredData, currentPage);
-        }
-    });
-    nextBtn.addEventListener('click', () => {
-        if (currentPage < Math.ceil(filteredData.length / rowsPerPage)) {
-            currentPage++;
-            renderTable(filteredData, currentPage);
-        }
-    });
-
+});
+nextBtn.addEventListener('click', () => {
+    if (currentPage < Math.ceil(filteredData.length / rowsPerPage)) {
+        currentPage++;
+        renderTable(filteredData, currentPage);
+    }
 });
 
-      </script>
+});
+  </script>
 
     </section>
 

@@ -1,203 +1,168 @@
 <%- include("include/header.ejs") -%>
-<main id="main" class="main">
-    <div class="pagetitle">
-        <h1>Data Tables</h1>
-    </div><!-- End Page Title -->
-    <div class="d-flex" style="justify-content: flex-end;">
-        <!-- <button class="btn btn-sm btn-success m-1" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add +</button> -->
-    </div>
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <!-- Table with stripped rows -->
-                        <table class="table datatable" id="withdrawTable1">
-                            <thead>
-                                <tr>
-                                    <th scope="col">S.No.</th>
-                                    <th scope="col">Mobile</th>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">BankName</th>
-                                    <th scope="col">IFSC</th>
-                                    <th scope="col">Acc.No</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">GST</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
 
-                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-                        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    .pagination button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        border: 1px solid #007bff;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+    }
 
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                                const tableBody = document.querySelector('#withdrawTable1 tbody');
+    .pagination button.disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
 
-                                fetch('https://win4cash.in/admin/acceptreq')
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        console.log(data, 'data');
-                                        data.forEach((user, index) => {
-                                            if (true) {
-                                                const tableRow = document.createElement('tr');
-                                                tableRow.innerHTML = `
-                                                    <td>${index + 1}</td>
-                                                    <td>${user.details.phoneno}</td>
-                                                    <td>${user.Username}</td>
-                                                    <td id="withdrawAmount">${user.Requestedammount}</td>
-                                                    <td>${user.details.bankname}</td>
-                                                    <td>${user.details.IFSC || '0'}</td>
-                                                    <td>${user.details.Accountno}</td>
-                                                    <td>${new Date(user.createdAt).toLocaleString()}</td>
-                                                     <td>${(user.Requestedammount)*0.18}</td>
-                                                    <td>
-                                                        <button class="btn btn-success btn-sm confirm-btn" data-username="${user.Username}">Delete Data</button>
-                                                       
-                                                    </td>
-                                                `;
-                                                tableBody.appendChild(tableRow);
-                                            }
-                                        });
+    .pagination button.active {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
 
-                                        // Add event listeners for confirm and reject buttons
-                                        document.querySelectorAll('.confirm-btn').forEach(button => {
-                                            button.addEventListener('click', function () {
-                                                const username = this.getAttribute('data-username');
-                                                handleAction(username, 'confirm');
-                                            });
-                                        });
+<section class="container mt-5" style="margin-top: 6rem !important;">
+<div class="table-responsive" style="width: 100vw;font-size: 12px;">
+    <input type="text" id="searchInput1" class="form-control mb-3" placeholder="Search...">
+    <table class="table" id="withdrawTable1">
+        <thead>
+            <tr>
+                <th scope="col">S.No.</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Username</th>
+                <th scope="col">Amount</th>
+                <th scope="col">BankName</th>
+                <th scope="col">IFSC</th>
+                <th scope="col">Acc.No</th>
+                <th scope="col">Date</th>
+                <th scope="col">Paid Amt</th>
+                <th scope="col">Required Amt</th>
+                <th scope="col">transaction Id</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class="pagination" id="paginationControls1"></div>
+</div>
+</section>
 
-                                        document.querySelectorAll('.reject-btn').forEach(button => {
-                                            button.addEventListener('click', function () {
-                                                const username = this.getAttribute('data-username');
-                                                handleAction(username, 'reject');
-                                            });
-                                        });
-                                    })
-                                    .catch(error => console.error('Error fetching data:', error));
-                            });
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const tableBody1 = document.querySelector('#withdrawTable1 tbody');
+    const searchInput1 = document.getElementById('searchInput1');
+    const paginationControls1 = document.getElementById('paginationControls1');
 
-                            function handleAction(username, action) {
-                                const actionText = action === 'confirm' ? 'confirm' : 'reject';
-                                if (confirm(`Are you sure you want to ${actionText} the request for ${username}?`)) {
-                                    axios.post(`https://win4cash.in/admin/deleteall`, { Username:username })
-                                        .then(response => {
-                                          console.log(response);
-                                            alert(`Request ${actionText}ed successfully!`);
-                                            // location.reload(); // Reload the table data
-                                        })
-                                        .catch(error => {
-                                            console.error(`Error ${actionText}ing request:`, error);
-                                            alert(`Failed to ${actionText} the request.`);
-                                        });
-                                }
-                            }
-                        </script>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- deltet modal -->
-    <div class="text-center">
-        <!-- Button HTML (to Trigger Modal) -->
-        <!-- <a >Click to Open Confirm Modal</a> -->
-    </div>
+    let currentPage1 = 1;
+    const rowsPerPage1 = 12;
+    let data1 = [];
 
-    <!-- Modal HTML -->
-    <div class="de">
-        <div id="myModal" class="modal fade">
-            <div class="modal-dialog modal-confirm">
-                <div class="modal-content">
-                    <i class="bi bi-exclamation-circle text-danger" style="font-size:2rem"></i>
-                    <!-- <div class="modal-header">
-                        <div class="icon-box">
-                            <i class="bi bi-twitter-x">X</i>
-                            <i class="material-icons"></i>
-                        </div>
-                        <h4 class="modal-title">Are you sure?</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div> -->
-                    <div class="modal-body">
-                        <p>Do you really want to delete these records? This process cannot be undone.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- deltet modal -->
+    function renderTable1(data) {
+        tableBody1.innerHTML = '';
+        const start = (currentPage1 - 1) * rowsPerPage1;
+        const end = start + rowsPerPage1;
+        const pageData = data.slice(start, end);
 
-    <!-- START Modal ADD LOBBIES -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Lobbies</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="">
-                        <div class="mb-3">
-                            <label for="formGroupExampleInput" class="form-label">Action</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Bot">
-                        </div>
-                        <button class="btn btn-success">Save</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end Modal ADD LOBBIES -->
+        pageData.forEach((user, index) => {
+            const tableRow = document.createElement('tr');
+            tableRow.innerHTML = `
+                <td>${start + index + 1}</td>
+                <td>${user.details.phoneno}</td>
+                <td>${user.Username}</td>
+                <td id="withdrawAmount">${user.Requestedammount}</td>
+                <td>${user.details.bankname}</td>
+                <td>${user.details.IFSC || '0'}</td>
+                <td>${user.details.Accountno}</td>
+                <td>${new Date(user.createdAt).toLocaleString()}</td>
+                 <td>${user.Gst[0].Gst || 'NaN'}</td>
+                <td>${799}</td>
+                 <td>${user.Gst[0].Trancation_id || 'NaN'}</td>
+                <td>
+                    <button class="btn btn-success btn-sm confirm-btn" data-username="${user.Username}">Delete Data</button>
+                </td>
+            `;
+            tableBody1.appendChild(tableRow);
+        });
 
-    <!-- START Modal edit LOBBIES -->
-    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Lobbies</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="">
-                        <div class="form-group col-md-12 mb-3">
-                            <label for="inputState">Action</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>approval</option>
-                                <option>Reject</option>
-                            </select>
-                        </div>
-                        <button class="btn btn-success">Save</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end Modal edit LOBBIES -->
-    <script>
-    </script>
+        // Add event listeners for buttons
+        document.querySelectorAll('.confirm-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const username = this.getAttribute('data-username');
+                handleAction(username, 'delete');
+            });
+        });
+    }
 
-</main><!-- End #main -->
-<!-- <script src="assets/js/main.js"></script> -->
+    function renderPagination1(totalRows) {
+        paginationControls1.innerHTML = '';
+        const totalPages = Math.ceil(totalRows / rowsPerPage1);
+
+        for (let i = 1; i <= totalPages; i++) {
+            const button = document.createElement('button');
+            button.textContent = i;
+            button.className = i === currentPage1 ? 'active' : '';
+            button.addEventListener('click', () => {
+                currentPage1 = i;
+                renderTable1(data1);
+                renderPagination1(data1.length);
+            });
+            paginationControls1.appendChild(button);
+        }
+    }
+
+    function filterData1(searchTerm) {
+        return data1.filter(user => 
+            user.details.phoneno.includes(searchTerm) ||
+            user.Username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.Requestedammount.toString().includes(searchTerm) ||
+            user.details.bankname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.details.IFSC.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.details.Accountno.includes(searchTerm) ||
+            new Date(user.createdAt).toLocaleString().includes(searchTerm) ||
+            (user.Requestedammount * 0.18).toFixed(2).includes(searchTerm)
+        );
+    }
+
+    searchInput1.addEventListener('input', function () {
+        const searchTerm = searchInput1.value;
+        const filteredData = filterData1(searchTerm);
+        currentPage1 = 1;
+        renderTable1(filteredData);
+        renderPagination1(filteredData.length);
+    });
+
+    axios.get('https://win4cash.in/admin/acceptreq')
+        .then(response => {
+            data1 = response.data;
+            console.log(data1)
+            renderTable1(data1);
+            renderPagination1(data1.length);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+});
+
+function handleAction(username, action) {
+    const actionText = action === 'delete' ? 'delete' : 'reject';
+    if (confirm(`Are you sure you want to ${actionText} the request for ${username}?`)) {
+        axios.post(`https://win4cash.in/admin/deleteall`, { Username: username })
+            .then(response => {
+                console.log(response);
+                alert(`Request ${actionText}d successfully!`);
+                location.reload(); // Reload the table data
+            })
+            .catch(error => {
+                console.error(`Error ${actionText}ing request:`, error);
+                alert(`Failed to ${actionText} the request.`);
+            });
+    }
+}
+</script>
+
 <%- include("include/footer.ejs") -%>

@@ -44,7 +44,7 @@
         document.addEventListener('DOMContentLoaded', function () {
         const tableBody = document.querySelector('#withdrawTable1 tbody');
       
-        fetch('https://win4cash.in/admin/rejectreq')
+        fetch('http://localhost:7000/admin/rejectreq')
           .then(response => response.json())
           .then(data => {
             console.log(data,'data');
@@ -65,25 +65,7 @@
                     
                     <!-- Add any additional columns or actions here -->
                   `;
-                  // const pencilIcon = tableRow.querySelector('.bi-pencil-square');
-                  // pencilIcon.addEventListener('click', function () {
-                  //   const userId = pencilIcon.getAttribute('data-id');
-                  //   const selectedRowData = JSON.parse(pencilIcon.getAttribute('data-row'));
-                  //   const amountElement = tableRow.querySelector('#withdrawAmount');
-                  //   const amount = amountElement.textContent; // Get the text content of the element
-                   
-                  //   // console.log('Amount:', amount);
-                  //   // Trigger the modal display
-                  //   $('#exampleModal1').modal('show');
-                  //   // alert(amount)
-                  //   // Update the selected data in the modal when the "Save" button is clicked
-                  //   const saveButton = document.getElementById('saveButton');
-                    
-                  //   saveButton.addEventListener('click', function () {
-                  //     const selectedOption = document.getElementById('inputState').value;
-                  //     handleModalFormSubmission(selectedOption, selectedRowData, userId, amount);
-                  //   });
-                  // });
+                 
                   tableBody.appendChild(tableRow);
                 }
               // });

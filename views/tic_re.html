@@ -1,28 +1,28 @@
-<%-  include("include/header.ejs") -%>
- <style>
-  .main{
-  position: relative;
-  top: 100px;
-  max-width: 400px;
-  margin: auto;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  text-align: center;
-  padding: 20px;
+<%- include("include/header.ejs") -%>
+
+<style>
+  .main {
+    position: relative;
+    top: 100px;
+    max-width: 400px;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    text-align: center;
+    padding: 20px;
   }
 
-  input{
+  input {
     width: 80%;
     margin: auto 15px;
-
   }
 
-  label{
-    text-align:start ;
+  label {
+    text-align: start;
     display: block;
     margin: 7px 0;
   }
 
-  #QR-submit{
+  #QR-submit {
     width: 80px;
     display: block;
     margin: 20px auto;
@@ -37,54 +37,54 @@
     background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
-}
+  }
 
-.table-container {
+  .table-container {
     width: 100%;
     overflow-x: auto;
-    margin-top: 120px;
-}
+    /* margin-top: 120px; */
+  }
 
-table {
+  table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-}
+  }
 
-th, td {
+  th, td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-}
+  }
 
-th {
+  th {
     background-color: #4CAF50;
     color: white;
-}
+  }
 
-tr:nth-child(even) {
+  tr:nth-child(even) {
     background-color: #f2f2f2;
-}
+  }
 
-tr:hover {
+  tr:hover {
     background-color: #ddd;
-}
+  }
 
-button {
+  button {
     padding: 6px 12px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
+  }
 
-button:hover {
+  button:hover {
     background-color: #45a049;
-}
+  }
 
-/* Modal Styles */
-.modal {
+  /* Modal Styles */
+  .modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -94,9 +94,9 @@ button:hover {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
-}
+  }
 
-.modal-content {
+  .modal-content {
     background-color: white;
     margin: 15% auto;
     padding: 20px;
@@ -104,228 +104,253 @@ button:hover {
     width: 80%;
     max-width: 400px;
     border-radius: 5px;
-}
+  }
 
-.close {
+  .close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-}
+  }
 
-.close:hover,
-.close:focus {
+  .close:hover,
+  .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-}
+  }
 
-.modal-buttons {
+  .modal-buttons {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-}
+  }
 
- </style>
-<div class="main" >
-    <div>
-    <label for="val">value</label>
+  /* Responsive Design */
+  @media screen and (max-width: 600px) {
+    table {
+      font-size: 12px;
+    }
+
+    th, td {
+      padding: 8px;
+    }
+
+    .main {
+      top: 50px;
+    }
+  }
+</style>
+
+<div class="main">
+  <div>
+    <label for="val">Value</label>
     <input type="text" id="val">
   </div>
   <div>
     <label for="QR">Select QR</label>
     <input type="file" id="QR">
   </div>
- 
-   <button id="QR-submit" onclick="handleQR()">Submit</button>
- 
+  <button id="QR-submit" onclick="handleQR()">Submit</button>
+</div>
+
+<!-- Search input -->
+<div style="margin-top: 140px; text-align: center; margin-bottom: 10px;">
+  <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search..." style="width: 80%;">
 </div>
 
 <div class="table-container">
   <table id="transactionTable">
-      <thead>
-          <tr>
-              <th>Username</th>
-              <th>Amount</th>
-              <th>Date</th>
-              <th>Transaction ID</th>
-              <th>Balance</th>
-              <th>Action</th>
-          </tr>
-      </thead>
-      <tbody id="tableBody">
-          <!-- Rows will be inserted here by JavaScript -->
-      </tbody>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Transaction ID</th>
+        <th>Balance</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      <!-- Rows will be inserted here by JavaScript -->
+    </tbody>
   </table>
+</div>
+
+<!-- Pagination controls -->
+<div style="text-align: center;">
+  <button onclick="previousPage()">Previous</button>
+  <span id="pageIndicator">Page 1</span>
+  <button onclick="nextPage()">Next</button>
 </div>
 
 <!-- Popup Modal -->
 <div id="editModal" class="modal">
   <div class="modal-content">
-      <span class="close" id="closeModal">&times;</span>
-      <h2>Edit Transaction for <span id="usernameDisplay"></span></h2>
-      <label for="newAmount">Add Amount:</label>
-      <input type="number" id="newAmount" name="newAmount">
-      <div class="modal-buttons">
-          <button id="cancelButton">Reject</button>
-          <button id="confirmButton">Confirm</button>
-      </div>
+    <span class="close" id="closeModal">&times;</span>
+    <h2>Edit Transaction for <span id="usernameDisplay"></span></h2>
+    <label for="newAmount">Add Amount:</label>
+    <input type="number" id="newAmount" name="newAmount">
+    <div class="modal-buttons">
+      <button id="cancelButton">Reject</button>
+      <button id="confirmButton">Confirm</button>
+    </div>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
+  let currentPage = 1;
+  const itemsPerPage = 10;
+  let allData = [];
 
-  async function getAllData(){
+  async function getAllData() {
     const res = await axios.get('https://win4cash.in/admin/paymentalldata');
-    
-    
-      updateTable(res.data);
-    
+    allData = res.data;
+    updateTable(allData);
   }
 
   getAllData();
 
-async function handleQR(){
-const qr = document.getElementById('QR');
-const file = qr.files[0];
-
-if (file) {
-        const formData = new FormData();
-        formData.append('file', file);
-
-       await  axios.post('https://win4cash.in/admin/setqr', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-        .then(response => {
-            console.log('File uploaded successfully:', response.data);
-        })
-        .catch(error => {
-            console.error('Error uploading file:', error);
-        });
+  async function handleQR() {
+    const qr = document.getElementById('QR');
+    const file = qr.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+      await axios.post('https://win4cash.in/admin/setqr', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(response => {
+        console.log('File uploaded successfully:', response.data);
+      }).catch(error => {
+        console.error('Error uploading file:', error);
+      });
     } else {
-        alert('Please select a file to upload.');
+      alert('Please select a file to upload.');
     }
-}
+  }
 
-//   const transactions = [
-//     { username: 'john_doe', amount: 250, balance: 1200, date: '2024-06-01', transactionId: 'TXN001' },
-//     { username: 'jane_smith', amount: 500, balance: 3000, date: '2024-06-02', transactionId: 'TXN002' },
-//     { username: 'alice_jones', amount: 150, balance: 900, date: '2024-06-03', transactionId: 'TXN003' },
-//     // Add more transactions as needed
-// ];
-
-function createTableRow(transaction) {
-  const tr = document.createElement('tr');
-
-    // Check if the transaction item status is 'panding'
+  function createTableRow(transaction) {
+    const tr = document.createElement('tr');
     if (transaction.item && transaction.item.stauts === 'Pending') {
-       
-    for (const key in transaction) {
-      if(key=='item'){
-        const td1 = document.createElement('td');
-        td1.textContent = transaction[key].Username;
-        tr.appendChild(td1);
-        const td2 = document.createElement('td');
-        td2.textContent = transaction[key].Ammount;
-        tr.appendChild(td2);
-        const td3 = document.createElement('td');
-        td3.textContent = new Date(transaction[key].createdAt).toLocaleString();
-        tr.appendChild(td3);
-        const td4 = document.createElement('td');
-        td4.textContent = transaction[key].Transcation_id;
-        tr.appendChild(td4);
-      }
+      for (const key in transaction) {
+        if (key == 'item') {
+          const td1 = document.createElement('td');
+          td1.textContent = transaction[key].Username;
+          tr.appendChild(td1);
+          const td2 = document.createElement('td');
+          td2.textContent = transaction[key].Ammount;
+          tr.appendChild(td2);
+          const td3 = document.createElement('td');
+          td3.textContent = new Date(transaction[key].createdAt).toLocaleString();
+          tr.appendChild(td3);
+          const td4 = document.createElement('td');
+          td4.textContent = transaction[key].Transcation_id;
+          tr.appendChild(td4);
+        }
         const td = document.createElement('td');
-        if(key==='wallet'){
+        if (key === 'wallet') {
           td.textContent = transaction[key];
           tr.appendChild(td);
         }
       }
-    
-
-    const actionTd = document.createElement('td');
-    const editButton = document.createElement('button');
-    editButton.textContent = 'Edit';
-    editButton.onclick = () => editTransaction(transaction.item.Username,transaction.item.Transcation_id);
-    actionTd.appendChild(editButton);
-    tr.appendChild(actionTd);
-
+      const actionTd = document.createElement('td');
+      const editButton = document.createElement('button');
+      editButton.textContent = 'Edit';
+      editButton.onclick = () => editTransaction(transaction.item.Username, transaction.item.Transcation_id);
+      actionTd.appendChild(editButton);
+      tr.appendChild(actionTd);
+    }
+    return tr;
   }
 
-    return tr;
-   
-}
-
-function editTransaction(username,Transcation_id) {
-  console.log(username,'username');
+  function editTransaction(username, Transcation_id) {
     const modal = document.getElementById('editModal');
     const usernameDisplay = document.getElementById('usernameDisplay');
     usernameDisplay.textContent = username;
     modal.style.display = 'block';
-
     const confirmButton = document.getElementById('confirmButton');
-    confirmButton.onclick = () => confirmEdit(username,Transcation_id);
-
+    confirmButton.onclick = () => confirmEdit(username, Transcation_id);
     const cancelButton = document.getElementById('cancelButton');
-    cancelButton.onclick = () => RejectRequest(username,Transcation_id);
-
+    cancelButton.onclick = () => rejectRequest(username, Transcation_id);
     const closeModalSpan = document.getElementById('closeModal');
     closeModalSpan.onclick = () => closeModal();
-}
-
-async function confirmEdit(username,Transcation_id) {
-    const Ammount = document.getElementById('newAmount').value;
-  if(Ammount==''){
-    alert('please enter a valid amount');
   }
-   const res = await axios.post('https://win4cash.in/admin/updatewallet',{Ammount,Transcation_id,username,type:'tr'});
 
-   window.location.reload();
-     
+  async function confirmEdit(username, Transcation_id) {
+    const Ammount = document.getElementById('newAmount').value;
+    if (Ammount == '') {
+      alert('Please enter a valid amount');
+    }
+    const res = await axios.post('https://win4cash.in/admin/updatewallet', { Ammount, Transcation_id, username, type: 'tr' });
+    window.location.reload();
+  }
 
-}
+  async function rejectRequest(username, Transcation_id) {
+    const res = await axios.post('https://win4cash.in/admin/paymentreq/reject', { username, Transcation_id });
+    console.log(res, 'gh')
+    window.location.reload();
+  }
 
-async function RejectRequest(username,Transcation_id){
-  const res = await axios.post('https://win4cash.in/admin/paymentreq/reject',{username,Transcation_id});
-
-  console.log(res,'gh')
-
-window.location.reload();
-}
-
-function closeModal() {
+  function closeModal() {
     const modal = document.getElementById('editModal');
     modal.style.display = 'none';
-}
+  }
 
-function updateTable(Data) {
-  console.log(Data,'step1')
+  function updateTable(Data) {
     const tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = '';
-    Data.forEach(transaction => {
-      console.log(transaction,'step2')
-        const row = createTableRow(transaction);
-        tableBody.appendChild(row);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedData = Data.slice(startIndex, endIndex);
+
+    paginatedData.forEach(transaction => {
+      const tr = createTableRow(transaction);
+      if (tr) {
+        tableBody.appendChild(tr);
+      }
     });
-}
 
-// function populateTable() {
-//     
-// }
+    document.getElementById('pageIndicator').textContent = `Page ${currentPage}`;
+  }
 
-// document.addEventListener('DOMContentLoaded', populateTable);
-
-// Close the modal if the user clicks anywhere outside of it
-window.onclick = function(event) {
-    const modal = document.getElementById('editModal');
-    if (event.target === modal) {
-        closeModal();
+  function previousPage() {
+    if (currentPage > 1) {
+      currentPage--;
+      updateTable(allData);
     }
-};
+  }
 
+  function nextPage() {
+    if ((currentPage * itemsPerPage) < allData.length) {
+      currentPage++;
+      updateTable(allData);
+    }
+  }
+
+  function searchTable() {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const filteredData = allData.filter(transaction => {
+      return (
+        transaction.item.Username.toLowerCase().includes(searchInput) ||
+        transaction.item.Transcation_id.toLowerCase().includes(searchInput) ||
+        transaction.item.Ammount.toString().includes(searchInput) ||
+        new Date(transaction.item.createdAt).toLocaleString().toLowerCase().includes(searchInput) ||
+        transaction.wallet.toString().includes(searchInput)
+      );
+    });
+    updateTable(filteredData);
+  }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById('editModal');
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 </script>
+
 <%- include("include/footer.ejs") -%>
