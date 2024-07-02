@@ -313,7 +313,7 @@ button:hover {
       // console.log(returnData);
       // alert('Return rates have been set.');
       // Here you can add the logic to send this data to your server
-      const res = await axios.post('https://win4cash.in/admin/profitmulti',returnData);
+      const res = await axios.post('http://localhost:7000/admin/profitmulti',returnData);
       console.log(res,'res');
   });
 
@@ -322,7 +322,7 @@ button:hover {
     console.log('step1')
     const mobileNumber = document.getElementById('mobileNumber').value;
 
-    const data = await axios.post('https://win4cash.in/admin/manual', {
+    const data = await axios.post('http://localhost:7000/admin/manual', {
       whatsappno: mobileNumber
     })
   console.log(data,'mobile');
@@ -332,7 +332,7 @@ async function submitPercentageForm() {
   console.log('step1')
     const percentageValue = document.getElementById('percentageValue').value;
 
- const data = await axios.post('https://win4cash.in/admin/manual', {
+ const data = await axios.post('http://localhost:7000/admin/manual', {
         per: percentageValue
     })
    console.log(data,'percent')
