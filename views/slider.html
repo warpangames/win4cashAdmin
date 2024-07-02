@@ -160,7 +160,7 @@ document.getElementById('imageFormupdate').addEventListener('submit', function (
     formData.append("NoticeImageIds", sliderImageIds); // Append the sliderImageIds here
   // console.log(formData)
     // Fetch API to send the FormData object
-    fetch(`https://admin.win4cash.in/NoticeUpdateImg`, {
+    fetch(`http://localhost:5000/NoticeUpdateImg`, {
         method: 'POST',
         body: formData
     })
@@ -193,7 +193,7 @@ document.getElementById('imageFormupdate').addEventListener('submit', function (
             formData.append("NoticeName", Name);
             formData.append("NoticeImg", NoticeImg);
             // Fetch API to send the FormData object
-            fetch(`https://admin.win4cash.in/NoticeSlider`, {
+            fetch(`http://localhost:5000/NoticeSlider`, {
                 method: 'POST',
                 body: formData
             })
@@ -217,7 +217,7 @@ location.reload()
           NticeinnerId,
             sliderImageIds
         };
-        fetch(`https://admin.win4cash.in/NoticeDelteImg`, {
+        fetch(`http://localhost:5000/NoticeDelteImg`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

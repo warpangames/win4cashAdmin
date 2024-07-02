@@ -130,7 +130,7 @@ tbody tr:hover {
 <script>
   
   async function getData(){
-    const res = await axios.get('https://win4cash.in/admin/paymentalldata');
+    const res = await axios.get('http://localhost:7000/admin/paymentalldata');
 
     const approvedData = res.data.filter(d => d.item.stauts === 'apporved');
     const rejectedData = res.data.filter(d => d.item.stauts === 'rejcted');

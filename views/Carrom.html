@@ -152,7 +152,7 @@
 
     };
     // fetch data using the API endpoint
-    fetch('https://admin.win4cash.in/GamePricePost', {
+    fetch('http://localhost:5000/GamePricePost', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const deleteModalButton = document.querySelector('#myModal .delete-modal-btn');
     deleteModalButton.addEventListener('click', function () {
         const index = deleteModalButton.getAttribute('data-index');
-        fetch(`https://admin.win4cash.in/GamePricePostdelete/${index}`, {
+        fetch(`http://localhost:5000/GamePricePostdelete/${index}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -27,14 +27,14 @@ var app = express();
 //   methods: "GET,POST", // Allow only GET and POST requests
 //   credentials: true // Allow credentials like cookies to be sent with the requests
 // };
-// "https://admin.win4cash.in",
-// "https://admin.win4cash.in",
+// "http://localhost:5000",
+// "http://localhost:5000",
 // "https://lobby.teenpattirummycircle.com"
-//"https://admin.win4cash.in", "https://rummykaadda.online"
+//"http://localhost:5000", "https://rummykaadda.online"
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://admin.win4cash.in",
+  "http://localhost:5000",
   "https://teenpattiultra.online",
   "https://lobby.teenpattiultra.online"
 ];

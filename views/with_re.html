@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
       renderPagination(filteredData.length);
   });
 
-  fetch('https://win4cash.in/admin/pendingreq')
+  fetch('http://localhost:7000/admin/pendingreq')
       .then(response => response.json())
       .then(responseData => {
           data = responseData;

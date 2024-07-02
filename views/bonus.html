@@ -156,7 +156,7 @@
     const formData = {
       refer, referUser, newuser
     };
-    fetch('https://admin.win4cash.in/referwinadmin', {
+    fetch('http://localhost:5000/referwinadmin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
           Id
         };
         // Send a POST request to delete the slider image
-        fetch(`https://admin.win4cash.in/DeletereferBounsAmount`, {
+        fetch(`http://localhost:5000/DeletereferBounsAmount`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

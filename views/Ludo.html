@@ -139,7 +139,7 @@
       status,
     };
     // fetch data using the API endpoint
-    fetch('https://admin.win4cash.in/LudoControllerPrice', {
+    fetch('http://localhost:5000/LudoControllerPrice', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -206,7 +206,7 @@ async function submitForm() {
 
     try {
       const response = await axios.post(
-        "https://admin.win4cash.in/LudoControllerPrice",
+        "http://localhost:5000/LudoControllerPrice",
         {gameName,gamePrice,winerPrice,player,logoimg,backgroundimg},
         {
           headers: {

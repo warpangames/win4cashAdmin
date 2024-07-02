@@ -193,6 +193,54 @@
   .form-actions button:hover {
       background-color: #0056b3;
   }
+ 
+.form-container {
+    display: flex;
+   flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}
+
+.form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin-top: 20px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.label2 {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.input2 {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
 </style>
 </head>
 <body>
@@ -203,6 +251,21 @@
       <div class="form-actions">
           <button type="submit">Set Returns</button>
       </div>
+  </form>
+</div>
+<div class="form-container">
+  <form class="form" id="mobileForm" method="post">
+      <h2>Submit Mobile Number</h2>
+      <label class="label2" for="mobileNumber">Mobile Number:</label>
+      <input class="input2" type="text" id="mobileNumber" name="mobileNumber" required>
+      <button type="button" onclick="submitMobileForm()">Submit Mobile Number</button>
+  </form>
+
+  <form class="form" id="percentageForm" method="post">
+      <h2>Set Percentage Value</h2>
+      <label class="label2" for="percentageValue">Percentage Value:</label>
+      <input class="input2" type="number" id="percentageValue" name="percentageValue" required>
+      <button type="button" onclick="submitPercentageForm()">Submit Percentage Value</button>
   </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -250,9 +313,31 @@
       // console.log(returnData);
       // alert('Return rates have been set.');
       // Here you can add the logic to send this data to your server
-      const res = await axios.post('https://win4cash.in/admin/profitmulti',returnData);
+      const res = await axios.post('http://localhost:7000/admin/profitmulti',returnData);
       console.log(res,'res');
   });
+
+
+  async function submitMobileForm() {
+    console.log('step1')
+    const mobileNumber = document.getElementById('mobileNumber').value;
+
+    const data = await axios.post('http://localhost:7000/admin/manual', {
+      whatsappno: mobileNumber
+    })
+  console.log(data,'mobile');
+}
+
+async function submitPercentageForm() {
+  console.log('step1')
+    const percentageValue = document.getElementById('percentageValue').value;
+
+ const data = await axios.post('http://localhost:7000/admin/manual', {
+        per: percentageValue
+    })
+   console.log(data,'percent')
+}
+
 </script>
   </main><!-- End #main -->
   <!-- <script src="assets/js/main.js"></script> -->

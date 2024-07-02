@@ -206,7 +206,7 @@ const getData = async () => {
     const user = document.querySelector('.totalUser');
     const panding = document.querySelector('.PandingWithdraw');
     const success = document.querySelector('.SuccessWithdraw');
-    const res = await axios.get('https://win4cash.in/admin/count');
+    const res = await axios.get('http://localhost:7000/admin/count');
     if (res.status == 200) {
         user.innerHTML = res.data.totaluser;
         panding.innerHTML = res.data.pendingreq;
