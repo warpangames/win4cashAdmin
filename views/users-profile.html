@@ -417,7 +417,7 @@
     }
 
   async function DeleteProfileImg(){
-       const {data1} = axios.post('http://localhost:5000/DeleteAdminImg',{email:fetchedData.Email});
+       const {data1} = axios.post('https://admin.win4cash.in/DeleteAdminImg',{email:fetchedData.Email});
        window.location.href = 'users-profile';
       }
 

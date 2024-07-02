@@ -94,7 +94,7 @@
 
   console.log(color,number,Bs)
 
-  const res = await axios.post('http://localhost:7000/admin/adminresult',{color,number,Bs});
+  const res = await axios.post('https://win4cash.in/admin/adminresult',{color,number,Bs});
   console.log(res);
   }
 
@@ -142,7 +142,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   const tableBody = document.querySelector('#withdrawTable tbody');
 
-  fetch('http://localhost:7000/admin/batdata')
+  fetch('https://win4cash.in/admin/batdata')
     .then(response => response.json())
     .then(data => {
       console.log(data)
