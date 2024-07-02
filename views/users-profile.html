@@ -318,7 +318,7 @@
     let fetchedData ;
     async function fetchData() {
       try {
-        const { data } = await axios.get('http://localhost:5000/AdminData');
+        const { data } = await axios.get('https://win4cash.in/AdminData');
         // console.log(data,'hjk')
         fetchedData ={...data};
         const fname = document.getElementById('FullName');
@@ -360,7 +360,7 @@
         password.innerHTML = data.EmailPassword;
         about.innerHTML = data.About;
         if(data.ProfileImg){
-          img.src = `http://localhost:5000/${data.ProfileImg}`;
+          img.src = `https://win4cash.in/${data.ProfileImg}`;
         }
 
         fname1.value = data.FullName;
@@ -376,11 +376,11 @@
         about1.innerText = data.About;
         job.value = data.Job;
         if(data.ProfileImg){
-          img1.src = `http://localhost:5000/${data.ProfileImg}`;
+          img1.src = `https://win4cash.in/${data.ProfileImg}`;
         }
         const header_img = document.getElementById('header-img');
         if(data.ProfileImg){
-          header_img.src = `http://localhost:5000/${data.ProfileImg}`;
+          header_img.src = `https://win4cash.in/${data.ProfileImg}`;
         }
 
       const passwordinput = document.getElementById("currentPassword");
@@ -413,11 +413,11 @@
         CurrentPassword: document.getElementById('currentPassword').value,
         NewPassword: document.getElementById('newPassword').value
       }
-      const { data } = await axios.post('http://localhost:5000/ChangeAdminPassword', formdata);
+      const { data } = await axios.post('https://win4cash.in/ChangeAdminPassword', formdata);
     }
 
   async function DeleteProfileImg(){
-       const {data1} = axios.post('http://localhost:5000/DeleteAdminImg',{email:fetchedData.Email});
+       const {data1} = axios.post('https://win4cash.in/DeleteAdminImg',{email:fetchedData.Email});
        window.location.href = 'users-profile';
       }
 
